@@ -5,29 +5,14 @@ Please complete the report problem below:
 ## Problem 1
 Provide your profitable path, the amountIn, amountOut value for each swap, and your final reward (your tokenB balance).
 
-tokenB -> tokenA
-amountIn: 5
-amountOut 5.655321988655322
-
-tokenA -> tokenC
-amountIn: 5.655321988655322
-amountOut 2.372138936383089
-
-tokenC -> tokenE
-amountIn: 2.372138936383089
-amountOut 1.5301371369636168
-
-tokenE -> tokenD
-amountIn: 1.5301371369636168
-amountOut 3.450741448619708
-
-tokenD -> tokenC
-amountIn: 3.450741448619708
-amountOut 6.684525579572586
-
-tokenC -> tokenB
-amountIn: 6.684525579572586
-amountOut 22.49722180697414
+| TokenIn | TokenOut | AmountIn | AmountOut |
+| --- | --- | --- | --- |
+| tokenB | tokenA | 5 | 5.655321988655322 |
+| tokenA | tokenC | 5.655321988655322 | 2.372138936383089 |
+| tokenC | tokenE | 2.372138936383089 | 1.5301371369636168 |
+| tokenE | tokenD | 1.5301371369636168 | 3.450741448619708 |
+| tokenD | tokenC | 3.450741448619708 | 6.684525579572586 |
+| tokenC | tokenB | 6.684525579572586 | 22.49722180697414 |
 
 path: tokenB->tokenA->tokenC->tokenE->tokenD->tokenC->tokenB, tokenB balance=22.49722180697414
 
@@ -39,6 +24,7 @@ What is slippage in AMM, and how does Uniswap V2 address this issue? Please illu
 為了避免交易受到滑點的影響過大，可以在合約的swap中多加一個設定交易停機價格的參數，若交易時價格波動大於該設定的參數就終止交易。以下列程式為例，其中sqrtPriceLimitX96為設定交易停機價格的參數:
 
 ![alt text](image.png)
+
 程式碼來源: https://y1cunhui.github.io/uniswapV3-book-zh-cn/docs/milestone_3/slippage-protection/?fbclid=IwAR0g7Sw0jJCBN9hnqKt-jvSCLzvY1dHv1F-kkgeZykO6SON_gO4Y1b9BWP8_aem_AbTHagpA1SY-0c-YqVIjOMuAQf0BowFa6m48u_sJJGYXL66UGxsNKfAMLjpEkZ-vC22BYlse4OB1KycoOjvIzqir
 
 ## Problem 3
@@ -50,6 +36,7 @@ minimum liquidity會被永久鎖定，這樣可以確保流動池中始終有tok
 Investigate the minting function in the UniswapV2Pair contract. When depositing tokens (not for the first time), liquidity can only be obtained using a specific formula. What is the intention behind this?
 
 liquidity = min(amount0/reserve0, amount1/reserve0) * totalSupply
+
 如果tokens以不同的比例被加進流動池，liquidity將會變得難以計算，為了解決這個問題，當提供比例與池中不同的tokens時，會拿到較低的liquidity作為處罰，這樣對平台來說沒有損失，提供者也會為了避免損失而提供與池中比例相同的tokens。
 
 ## Problem 5
