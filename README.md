@@ -6,30 +6,40 @@ Please complete the report problem below:
 Provide your profitable path, the amountIn, amountOut value for each swap, and your final reward (your tokenB balance).
 
 tokenB -> tokenA
-amountIn:  5
+amountIn: 5
 amountOut 5.655321988655322
+
 tokenA -> tokenC
-amountIn:  5.655321988655322
+amountIn: 5.655321988655322
 amountOut 2.372138936383089
+
 tokenC -> tokenE
-amountIn:  2.372138936383089
+amountIn: 2.372138936383089
 amountOut 1.5301371369636168
+
 tokenE -> tokenD
-amountIn:  1.5301371369636168
+amountIn: 1.5301371369636168
 amountOut 3.450741448619708
+
 tokenD -> tokenC
-amountIn:  3.450741448619708
+amountIn: 3.450741448619708
 amountOut 6.684525579572586
+
 tokenC -> tokenB
-amountIn:  6.684525579572586
+amountIn: 6.684525579572586
 amountOut 22.49722180697414
+
 path: tokenB->tokenA->tokenC->tokenE->tokenD->tokenC->tokenB, tokenB balance=22.49722180697414
 
 ## Problem 2
 What is slippage in AMM, and how does Uniswap V2 address this issue? Please illustrate with a function as an example.
 
-Slippage refers to the price difference between the expected price of a trade and the actual price at which the trade is confirmed on the blockchain. It occurs because the market often moves too quickly and causes the trade to be executed at a higher or lower price than expected.
+滑點(Slippage)指的是進行交易前的期望價格與交易實際執行價格之間的價差，造成價差的原因主要在於發送交易和交易被打包進區塊鏈之間有時間上的延遲，在此期間市場快速變動，造成交易價格比預期高或低。
 
+為了避免交易受到滑點的影響過大，可以在合約的swap中多加一個設定交易停機價格的參數，若交易時價格波動大於該設定的參數就終止交易。以下列程式為例，其中sqrtPriceLimitX96為設定交易停機價格的參數:
+
+![alt text](image.png)
+程式碼來源: https://y1cunhui.github.io/uniswapV3-book-zh-cn/docs/milestone_3/slippage-protection/?fbclid=IwAR0g7Sw0jJCBN9hnqKt-jvSCLzvY1dHv1F-kkgeZykO6SON_gO4Y1b9BWP8_aem_AbTHagpA1SY-0c-YqVIjOMuAQf0BowFa6m48u_sJJGYXL66UGxsNKfAMLjpEkZ-vC22BYlse4OB1KycoOjvIzqir
 
 ## Problem 3
 Please examine the mint function in the UniswapV2Pair contract. Upon initial liquidity minting, a minimum liquidity is subtracted. What is the rationale behind this design?
